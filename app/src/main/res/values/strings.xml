@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">assignment1</string>
+    <string name="enter_course_name">enter course name</string>
+    <string name="new_assignment">new assignment</string>
+    <string name="assignments">Assignments</string>
+    <string name="enter_assignment_title">enter assignment title</string>
+    <string name="enter_your_question">enter your question</string>
 </resources>

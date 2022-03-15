@@ -10,9 +10,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment1">
         <activity
+            android:name=".ResponseAssignmentActivity"
+            android:exported="false"
+            android:label="Response Assignment"
+            android:parentActivityName=".CourseActivity" />
+        <activity
+            android:name=".NewAssignmentActivity"
+            android:exported="false"
+            android:label="New Assignment"
+            android:parentActivityName=".CourseActivity" />
+        <activity
+            android:name=".CourseActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:label="Course"
+            android:parentActivityName=".PanelActivity" />
+        <activity
+            android:name=".JoinCourseActivity"
+            android:exported="false"
+            android:parentActivityName=".PanelActivity" />
+        <activity
+            android:name=".CreateCourseActivity"
+            android:exported="false"
+            android:label="Create Course"
+            android:parentActivityName=".PanelActivity" />
+        <activity
             android:name=".PanelActivity"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Panel"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
