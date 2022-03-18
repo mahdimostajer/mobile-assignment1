@@ -32,6 +32,8 @@ public class CourseActivity extends AppCompatActivity {
     public final static String EXTRA_ASSIGNMENT_TITLE = "extra assignment title";
     public final static String EXTRA_ASSIGNMENT_QUESTION = "extra assignment question";
     public final static String EXTRA_ASSIGNMENT = "extra assignment";
+    public static final String EXTRA_USER_TYPE = "extra user type";
+
 
 
     private ArrayList<Assignment> assignments = new ArrayList<>();
@@ -69,7 +71,7 @@ public class CourseActivity extends AppCompatActivity {
             }
         }
 
-        adapter = new AssignmentAdapter(CourseActivity.this, assignments);
+        adapter = new AssignmentAdapter(CourseActivity.this, assignments, userType);
         binding.assignmentRecyclerView.setAdapter(adapter);
         binding.assignmentRecyclerView.setLayoutManager(new LinearLayoutManager(CourseActivity.this));
 

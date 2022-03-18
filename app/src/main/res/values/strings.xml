@@ -8,4 +8,10 @@
     <string name="submit">submit</string>
     <string name="enter_your_response">enter your response</string>
     <string name="upload_answer">upload answer</string>
+    <string name="create_class">create class</string>
+    <string name="join_class">join class</string>
+    <string name="course">course:</string>
+    <string name="professor">professor:</string>
+    <string name="title">title:</string>
+    <string name="question">question:</string>
 </resources>

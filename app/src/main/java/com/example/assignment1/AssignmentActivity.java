@@ -13,6 +13,7 @@ public class AssignmentActivity extends AppCompatActivity {
 
     ActivityAssignmentBinding binding;
     Assignment assignment;
+    PanelActivity.UserType userType;
     public final static String EXTRA_RESPONSE = "extra response";
 
     @Override
@@ -23,9 +24,25 @@ public class AssignmentActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         assignment = intent.getParcelableExtra(CourseActivity.EXTRA_ASSIGNMENT);
+        userType = (PanelActivity.UserType) intent.getSerializableExtra(CourseActivity.EXTRA_USER_TYPE);
+
+        if (userType == PanelActivity.UserType.PROFESSOR) {
+            professorContent();
+        } else {
+            studentContent();
+        }
+
         binding.assignmentTitleTextview.setText(assignment.title);
         binding.assignmentQuestionTextview.setText(assignment.question);
 
+
+    }
+
+    private void professorContent() {
+
+    }
+
+    private void studentContent() {
 
     }
 }

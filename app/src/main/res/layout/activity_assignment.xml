@@ -7,23 +7,40 @@
     tools:context=".AssignmentActivity">
 
     <TextView
-        android:id="@+id/assignment_title_textview"
-        android:layout_width="match_parent"
+        android:id="@+id/assignment_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
+        android:text="@string/title"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/assignment_title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toEndOf="@id/assignment_title"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="title" />
 
     <TextView
-        android:id="@+id/assignment_question_textview"
-        android:layout_width="match_parent"
+        android:id="@+id/assignment_question"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_margin="30dp"
+        android:layout_margin="20dp"
+        android:text="@string/question"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/assignment_title_textview"
+        app:layout_constraintTop_toBottomOf="@id/assignment_title_textview" />
 
+    <TextView
+        android:id="@+id/assignment_question_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toEndOf="@id/assignment_question"
+        app:layout_constraintTop_toBottomOf="@id/assignment_title_textview"
         tools:text="question?" />
 
 

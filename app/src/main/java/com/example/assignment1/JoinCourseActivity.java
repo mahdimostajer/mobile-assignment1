@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.example.assignment1.Models.Course;
@@ -41,14 +42,19 @@ public class JoinCourseActivity extends AppCompatActivity {
         Type type = new TypeToken<List<Course>>() {
         }.getType();
         List<Course> courses = gson.fromJson(mPreferences.getString(PanelActivity.CLASS_ROOMS, null), type);
-        courses.removeIf(classroom -> {
-            for (Course joinedCourse : joinedCourses) {
-                if (joinedCourse.name.equals(classroom.name) && joinedCourse.ProfessorUsername.equals(classroom.ProfessorUsername)) {
-                    return true;
+        if(courses == null){
+            courses = new ArrayList<>();
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            courses.removeIf(classroom -> {
+                for (Course joinedCourse : joinedCourses) {
+                    if (joinedCourse.name.equals(classroom.name) && joinedCourse.ProfessorUsername.equals(classroom.ProfessorUsername)) {
+                        return true;
+                    }
                 }
-            }
-            return false;
-        });
+                return false;
+            });
+        }
 
         adapter = new JoinCourseAdapter(JoinCourseActivity.this, courses);
         binding.joinCourseRecyclerview.setAdapter(adapter);

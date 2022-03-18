@@ -18,11 +18,13 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
     private final List<Assignment> assignments;
     private LayoutInflater mInflater;
     private Context context;
+    private PanelActivity.UserType userType;
 
-    public AssignmentAdapter(Context context, List<Assignment> assignments) {
+    public AssignmentAdapter(Context context, List<Assignment> assignments, PanelActivity.UserType userType) {
         mInflater = LayoutInflater.from(context);
         this.assignments = assignments;
         this.context = context;
+        this.userType = userType;
     }
 
     class AssignmentViewHolder extends RecyclerView.ViewHolder {
@@ -56,6 +58,7 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
             public void onClick(View view) {
                 Intent intent = new Intent(context.getApplicationContext(), AssignmentActivity.class);
                 intent.putExtra(CourseActivity.EXTRA_ASSIGNMENT, current);
+                intent.putExtra(CourseActivity.EXTRA_USER_TYPE, userType);
                 ((CourseActivity) context).startActivity(intent);
             }
         });

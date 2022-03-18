@@ -127,6 +127,8 @@ public class PanelActivity extends AppCompatActivity {
             }
         }
 
+        binding.newCourseButton.setText(R.string.create_class);
+
         binding.newCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,6 +153,7 @@ public class PanelActivity extends AppCompatActivity {
             }
         }
 
+        binding.newCourseButton.setText(R.string.join_class);
         binding.newCourseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
