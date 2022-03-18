@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment1">
         <activity
-            android:name=".ResponseAssignmentActivity"
+            android:name=".AssignmentActivity"
             android:exported="false"
             android:label="Response Assignment"
             android:parentActivityName=".CourseActivity" />
@@ -22,12 +22,13 @@
         <activity
             android:name=".CourseActivity"
             android:exported="false"
-            android:launchMode="singleTop"
             android:label="Course"
+            android:launchMode="singleTop"
             android:parentActivityName=".PanelActivity" />
         <activity
             android:name=".JoinCourseActivity"
             android:exported="false"
+            android:label="Join Course"
             android:parentActivityName=".PanelActivity" />
         <activity
             android:name=".CreateCourseActivity"

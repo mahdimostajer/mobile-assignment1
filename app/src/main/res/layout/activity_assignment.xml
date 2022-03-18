@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResponseAssignmentActivity">
+    tools:context=".AssignmentActivity">
 
     <TextView
         android:id="@+id/assignment_title_textview"
@@ -18,12 +18,23 @@
     <TextView
         android:id="@+id/assignment_question_textview"
         android:layout_width="match_parent"
-        android:layout_margin="30dp"
-
         android:layout_height="wrap_content"
+
+        android:layout_margin="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/assignment_title_textview"
 
         tools:text="question?" />
+
+
+    <Button
+        android:id="@+id/upload_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/upload_answer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/assignment_question_textview" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

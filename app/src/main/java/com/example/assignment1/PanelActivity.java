@@ -49,7 +49,7 @@ public class PanelActivity extends AppCompatActivity {
     private ArrayList<Course> personCourses;
     private CourseAdapter courseAdapter;
     private String id = "akbar";
-    private UserType type = UserType.STUDENT;
+    private UserType type = UserType.PROFESSOR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

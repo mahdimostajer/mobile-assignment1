@@ -31,6 +31,8 @@ public class CourseActivity extends AppCompatActivity {
     public final Integer CREATE_ASSIGNMENT_REQUEST = 100;
     public final static String EXTRA_ASSIGNMENT_TITLE = "extra assignment title";
     public final static String EXTRA_ASSIGNMENT_QUESTION = "extra assignment question";
+    public final static String EXTRA_ASSIGNMENT = "extra assignment";
+
 
     private ArrayList<Assignment> assignments = new ArrayList<>();
     private AssignmentAdapter adapter;

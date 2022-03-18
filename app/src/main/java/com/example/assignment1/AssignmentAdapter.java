@@ -54,8 +54,9 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context.getApplicationContext(), ResponseAssignmentActivity.class);
-                context.startActivity(intent);
+                Intent intent = new Intent(context.getApplicationContext(), AssignmentActivity.class);
+                intent.putExtra(CourseActivity.EXTRA_ASSIGNMENT, current);
+                ((CourseActivity) context).startActivity(intent);
             }
         });
     }
