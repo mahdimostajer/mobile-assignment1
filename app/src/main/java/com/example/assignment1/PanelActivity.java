@@ -48,15 +48,17 @@ public class PanelActivity extends AppCompatActivity {
 
     private ArrayList<Course> personCourses;
     private CourseAdapter courseAdapter;
-    private String id = "akbar";
-    private UserType type = UserType.PROFESSOR;
+    private String username;
+    private UserType type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityPanelBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        Intent intent = new Intent();
+        username = intent.getStringExtra(ProfessorLoginActivity.USERNAME);
+        type = (UserType) intent.getSerializableExtra(MainActivity.USERTYPE);
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
         if (type == UserType.PROFESSOR) {
@@ -64,10 +66,6 @@ public class PanelActivity extends AppCompatActivity {
         } else if (type == UserType.STUDENT) {
             getCourseStudent();
         }
-
-        courseAdapter = new CourseAdapter(PanelActivity.this, personCourses, type);
-        binding.courseRecyclerview.setAdapter(courseAdapter);
-        binding.courseRecyclerview.setLayoutManager(new LinearLayoutManager(PanelActivity.this));
 
     }
 
@@ -78,7 +76,7 @@ public class PanelActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 String name = data.getStringExtra(CreateCourseActivity.COURSE_NAME);
 
-                personCourses.add(new Course(name, id));
+                personCourses.add(new Course(name, username));
                 binding.courseRecyclerview.getAdapter().notifyItemInserted(personCourses.size() - 1);
                 binding.courseRecyclerview.smoothScrollToPosition(personCourses.size() - 1);
 
@@ -102,7 +100,7 @@ public class PanelActivity extends AppCompatActivity {
                 if (studentCourses == null) {
                     studentCourses = new ArrayList<>();
                 }
-                studentCourses.add(new StudentCourse(id, course));
+                studentCourses.add(new StudentCourse(username, course));
 
                 Gson gson2 = new Gson();
                 String json2 = gson2.toJson(studentCourses);
@@ -121,7 +119,7 @@ public class PanelActivity extends AppCompatActivity {
         personCourses = new ArrayList<>();
         if (courses != null) {
             for (Course item : courses) {
-                if (item.ProfessorUsername.equals(id)) {
+                if (item.ProfessorUsername.equals(username)) {
                     personCourses.add(item);
                 }
             }
@@ -137,6 +135,11 @@ public class PanelActivity extends AppCompatActivity {
             }
         });
 
+
+        courseAdapter = new CourseAdapter(PanelActivity.this, personCourses, this.type);
+        binding.courseRecyclerview.setAdapter(courseAdapter);
+        binding.courseRecyclerview.setLayoutManager(new LinearLayoutManager(PanelActivity.this));
+
     }
 
     private void getCourseStudent() {
@@ -147,7 +150,7 @@ public class PanelActivity extends AppCompatActivity {
         personCourses = new ArrayList<>();
         if (studentCourses != null) {
             for (StudentCourse item : studentCourses) {
-                if (item.studentId.equals(id)) {
+                if (item.studentId.equals(username)) {
                     personCourses.add(item.course);
                 }
             }
@@ -162,5 +165,10 @@ public class PanelActivity extends AppCompatActivity {
                 startActivityForResult(intent, Join_COURSE_REQUEST);
             }
         });
+
+        courseAdapter = new CourseAdapter(PanelActivity.this, personCourses, this.type);
+        binding.courseRecyclerview.setAdapter(courseAdapter);
+        binding.courseRecyclerview.setLayoutManager(new LinearLayoutManager(PanelActivity.this));
     }
+
 }
