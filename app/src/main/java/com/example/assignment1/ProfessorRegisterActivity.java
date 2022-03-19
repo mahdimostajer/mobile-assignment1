@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProfessorRegisterActivity extends AppCompatActivity {
@@ -94,10 +95,12 @@ public class ProfessorRegisterActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Type type = new TypeToken<List<Professor>>() {}.getType();
         List<Professor> professors = gson.fromJson(preferences.getString(ProfessorRegisterActivity.PROFESSORS, null), type);
-        for (Professor professor : professors){
-            if(professor.username.equals(username)){
-                Toast.makeText(ProfessorRegisterActivity.this, "Professor Exists with this username!", Toast.LENGTH_LONG).show();
-                return true;
+        if(professors != null){
+            for (Professor professor : professors){
+                if(professor.username.equals(username)){
+                    Toast.makeText(ProfessorRegisterActivity.this, "Professor Exists with this username!", Toast.LENGTH_LONG).show();
+                    return true;
+                }
             }
         }
         return false;
@@ -109,6 +112,8 @@ public class ProfessorRegisterActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Type type = new TypeToken<List<Professor>>() {}.getType();
         List<Professor> professors = gson.fromJson(preferences.getString(ProfessorRegisterActivity.PROFESSORS, null), type);
+        if(professors == null)
+            professors = new ArrayList<>();
         Professor newProf = new Professor(firstName, lastName, university, username, password);
         professors.add(newProf);
         String profsJson = gson.toJson(professors);

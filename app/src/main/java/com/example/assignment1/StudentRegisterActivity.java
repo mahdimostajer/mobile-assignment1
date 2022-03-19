@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentRegisterActivity extends AppCompatActivity {
@@ -90,10 +91,12 @@ public class StudentRegisterActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Type type = new TypeToken<List<Student>>() {}.getType();
         List<Student> students = gson.fromJson(preferences.getString(StudentRegisterActivity.STUDENTS, null), type);
-        for (Student student : students){
-            if(student.username.equals(username)){
-                Toast.makeText(StudentRegisterActivity.this, "Student Exists with this username!", Toast.LENGTH_LONG).show();
-                return true;
+        if(students != null){
+            for (Student student : students){
+                if(student.username.equals(username)){
+                    Toast.makeText(StudentRegisterActivity.this, "Student Exists with this username!", Toast.LENGTH_LONG).show();
+                    return true;
+                }
             }
         }
         return false;
@@ -105,6 +108,8 @@ public class StudentRegisterActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Type type = new TypeToken<List<Student>>() {}.getType();
         List<Student> students = gson.fromJson(preferences.getString(StudentRegisterActivity.STUDENTS, null), type);
+        if(students == null)
+            students = new ArrayList<>();
         Student newStudent = new Student(firstName, lastName, studentId, username, password);
         students.add(newStudent);
         String studentsJson = gson.toJson(students);

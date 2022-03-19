@@ -71,15 +71,17 @@ public class StudentLoginActivity extends AppCompatActivity {
         Gson gson = new Gson();
         Type type = new TypeToken<List<Student>>() {}.getType();
         List<Student> students = gson.fromJson(preferences.getString(StudentRegisterActivity.STUDENTS, null), type);
-        for (Student student : students){
-            if(student.username.equals(username)){
-                if(student.firstname.equals(password))
-                    return true;
-                Toast.makeText(StudentLoginActivity.this, "Wrong password is entered!", Toast.LENGTH_LONG).show();
-                return false;
+        if(students != null){
+            for (Student student : students){
+                if(student.username.equals(username)){
+                    if(student.firstname.equals(password))
+                        return true;
+                    Toast.makeText(StudentLoginActivity.this, "Wrong password is entered!", Toast.LENGTH_LONG).show();
+                    return false;
+                }
             }
         }
-        Toast.makeText(StudentLoginActivity.this, "Student doesn't exists with this username!!", Toast.LENGTH_LONG).show();
+        Toast.makeText(StudentLoginActivity.this, "Student doesn't exists with this username!", Toast.LENGTH_LONG).show();
         return false;
     }
 }

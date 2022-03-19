@@ -72,17 +72,18 @@ public class ProfessorLoginActivity extends AppCompatActivity {
         preferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         Gson gson = new Gson();
         Type type = new TypeToken<List<Professor>>() {}.getType();
-        Log.d("sss", preferences.getString(ProfessorRegisterActivity.PROFESSORS, null));
         List<Professor> professors = gson.fromJson(preferences.getString(ProfessorRegisterActivity.PROFESSORS, null), type);
-        for (Professor professor : professors){
-            if(professor.username.equals(username)){
-                if(professor.firstname.equals(password))
-                    return true;
-                Toast.makeText(ProfessorLoginActivity.this, "Wrong password is entered!", Toast.LENGTH_LONG).show();
-                return false;
+        if(professors != null){
+            for (Professor professor : professors){
+                if(professor.username.equals(username)){
+                    if(professor.firstname.equals(password))
+                        return true;
+                    Toast.makeText(ProfessorLoginActivity.this, "Wrong password is entered!", Toast.LENGTH_LONG).show();
+                    return false;
+                }
             }
         }
-        Toast.makeText(ProfessorLoginActivity.this, "Professor doesn't exists with this username!!", Toast.LENGTH_LONG).show();
+        Toast.makeText(ProfessorLoginActivity.this, "Professor doesn't exists with this username!", Toast.LENGTH_LONG).show();
         return false;
     }
 }
