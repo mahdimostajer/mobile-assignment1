@@ -1,6 +1,5 @@
 package com.example.assignment1;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,17 +15,18 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         binding.studentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PanelActivity.class);
+                Intent intent = new Intent(MainActivity.this, StudentLoginActivity.class);
                 startActivity(intent);
             }
         });
         binding.professorButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PanelActivity.class);
+                Intent intent = new Intent(MainActivity.this, ProfessorLoginActivity.class);
                 startActivity(intent);
             }
         });
