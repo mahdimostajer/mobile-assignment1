@@ -20,6 +20,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
     private SharedPreferences preferences;
     String firstName, lastName, studentId, username, password, passwordConfirm;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +84,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    protected boolean checkUserExistence(String username){
+    private boolean checkUserExistence(String username){
         String sharedPrefFile = "com.example.android.assignment1";
         preferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         Gson gson = new Gson();
