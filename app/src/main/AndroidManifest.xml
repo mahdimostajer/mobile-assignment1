@@ -50,6 +50,16 @@
             android:label="Student Login"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".ProfessorRegisterActivity"
+            android:exported="false"
+            android:label="Professor Register"
+            android:parentActivityName=".ProfessorLoginActivity" />
+        <activity
+            android:name=".StudentRegisterActivity"
+            android:exported="false"
+            android:label="Student Register"
+            android:parentActivityName=".StudentLoginActivity" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

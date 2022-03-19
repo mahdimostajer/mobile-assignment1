@@ -1,4 +1,6 @@
 package com.example.assignment1;
 
-public class StudentRegisterActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class StudentRegisterActivity extends AppCompatActivity {
 }

@@ -29,7 +29,7 @@ public class ProfessorLoginActivity extends AppCompatActivity {
         ClickableSpan cs = new ClickableSpan() {
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(ProfessorLoginActivity.this, PanelActivity.class);
+                Intent intent = new Intent(ProfessorLoginActivity.this, ProfessorRegisterActivity.class);
                 startActivity(intent);
             }
         };
