@@ -6,6 +6,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +23,7 @@ public class ProfessorLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityProfessorLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        TextView textView = findViewById(R.id.registerTextView);
+        TextView textView = (TextView) findViewById(R.id.registerTextView);
         String text = "Don't have an account? Register";
         SpannableString ss = new SpannableString(text);
         ClickableSpan cs = new ClickableSpan() {
@@ -33,7 +34,7 @@ public class ProfessorLoginActivity extends AppCompatActivity {
             }
         };
 
-        ss.setSpan(cs,23, 30, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(cs,23, 31, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(ss);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
 
