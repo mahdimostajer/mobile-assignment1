@@ -15,6 +15,8 @@ import com.example.assignment1.databinding.ActivityMainBinding;
 import com.example.assignment1.databinding.ActivityProfessorLoginBinding;
 
 public class ProfessorLoginActivity extends AppCompatActivity {
+    public final static String USERNAME = "username";
+
     ActivityProfessorLoginBinding binding;
 
 

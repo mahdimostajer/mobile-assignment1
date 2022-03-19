@@ -10,6 +10,7 @@ import com.example.assignment1.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity{
     ActivityMainBinding binding;
+    public final static String USERTYPE = "type";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
