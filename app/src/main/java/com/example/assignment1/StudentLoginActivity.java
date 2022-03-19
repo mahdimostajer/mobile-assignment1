@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.assignment1.databinding.ActivityStudentLoginBinding;
 
 public class StudentLoginActivity extends AppCompatActivity {
+    public final static String USERNAME = "username";
     ActivityStudentLoginBinding binding;
 
 

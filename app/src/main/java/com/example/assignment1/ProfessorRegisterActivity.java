@@ -88,7 +88,7 @@ public class ProfessorRegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean checkUserExistence(String username){
+    protected boolean checkUserExistence(String username){
         String sharedPrefFile = "com.example.android.assignment1";
         preferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         Gson gson = new Gson();
@@ -115,5 +115,6 @@ public class ProfessorRegisterActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(ProfessorRegisterActivity.PROFESSORS, profsJson);
         editor.apply();
+        Toast.makeText(ProfessorRegisterActivity.this, String.format("Professor %s registration completed successfully!", username), Toast.LENGTH_LONG).show();
     }
 }
