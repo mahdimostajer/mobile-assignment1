@@ -60,7 +60,7 @@ public class ProfessorLoginActivity extends AppCompatActivity {
                 if (isValid){
                     Intent intent = new Intent(ProfessorLoginActivity.this, PanelActivity.class);
                     intent.putExtra(StudentLoginActivity.USERNAME, username);
-                    intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.STUDENT);
+                    intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.PROFESSOR);
                     startActivity(intent);
                 }
             }
@@ -76,7 +76,7 @@ public class ProfessorLoginActivity extends AppCompatActivity {
         if(professors != null){
             for (Professor professor : professors){
                 if(professor.username.equals(username)){
-                    if(professor.firstname.equals(password))
+                    if(professor.password.equals(password))
                         return true;
                     Toast.makeText(ProfessorLoginActivity.this, "Wrong password is entered!", Toast.LENGTH_LONG).show();
                     return false;

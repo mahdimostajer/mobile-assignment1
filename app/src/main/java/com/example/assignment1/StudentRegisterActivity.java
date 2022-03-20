@@ -110,7 +110,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         List<Student> students = gson.fromJson(preferences.getString(StudentRegisterActivity.STUDENTS, null), type);
         if(students == null)
             students = new ArrayList<>();
-        Student newStudent = new Student(firstName, lastName, studentId, username, password);
+        Student newStudent = new Student(username, password, firstName, lastName, studentId);
         students.add(newStudent);
         String studentsJson = gson.toJson(students);
         SharedPreferences.Editor editor = preferences.edit();

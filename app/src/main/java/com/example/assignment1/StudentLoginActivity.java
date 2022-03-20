@@ -74,7 +74,7 @@ public class StudentLoginActivity extends AppCompatActivity {
         if(students != null){
             for (Student student : students){
                 if(student.username.equals(username)){
-                    if(student.firstname.equals(password))
+                    if(student.password.equals(password))
                         return true;
                     Toast.makeText(StudentLoginActivity.this, "Wrong password is entered!", Toast.LENGTH_LONG).show();
                     return false;

@@ -22,8 +22,8 @@ public class NewAssignmentActivity extends AppCompatActivity {
         binding.submitAssignmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String title = binding.assignmentTitleEdittext.getText().toString();
-                String question = binding.questionEdittext.getText().toString();
+                String title = binding.assignmentTitleEdittext.getEditText().getText().toString();
+                String question = binding.questionEdittext.getEditText().getText().toString();
                 Intent intent = new Intent();
                 intent.putExtra(CourseActivity.EXTRA_ASSIGNMENT_TITLE, title);
                 intent.putExtra(CourseActivity.EXTRA_ASSIGNMENT_QUESTION, question);

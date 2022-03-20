@@ -114,7 +114,7 @@ public class ProfessorRegisterActivity extends AppCompatActivity {
         List<Professor> professors = gson.fromJson(preferences.getString(ProfessorRegisterActivity.PROFESSORS, null), type);
         if(professors == null)
             professors = new ArrayList<>();
-        Professor newProf = new Professor(firstName, lastName, university, username, password);
+        Professor newProf = new Professor(username, password, firstName, lastName, university);
         professors.add(newProf);
         String profsJson = gson.toJson(professors);
         SharedPreferences.Editor editor = preferences.edit();

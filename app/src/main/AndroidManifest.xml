@@ -38,6 +38,7 @@
         <activity
             android:name=".PanelActivity"
             android:exported="false"
+            android:launchMode="singleTop"
             android:label="Panel"
             android:parentActivityName=".MainActivity" />
         <activity

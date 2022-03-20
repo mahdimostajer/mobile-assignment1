@@ -56,7 +56,7 @@ public class PanelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPanelBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Intent intent = new Intent();
+        Intent intent = getIntent();
         username = intent.getStringExtra(ProfessorLoginActivity.USERNAME);
         type = (UserType) intent.getSerializableExtra(MainActivity.USERTYPE);
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);

@@ -20,7 +20,7 @@ public class CreateCourseActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.submitCourseButton.setOnClickListener(view -> {
-            String name = binding.courseNameEdittext.getText().toString();
+            String name = binding.courseNameEdittext.getEditText().getText().toString();
             Intent intent = new Intent();
             intent.putExtra(COURSE_NAME, name);
             setResult(RESULT_OK, intent);

@@ -3,8 +3,8 @@
     <string name="enter_course_name">enter course name</string>
     <string name="new_assignment">new assignment</string>
     <string name="assignments">Assignments</string>
-    <string name="enter_assignment_title">enter assignment title</string>
-    <string name="enter_your_question">enter your question</string>
+    <string name="enter_assignment_title">assignment title</string>
+    <string name="enter_your_question">question</string>
     <string name="submit">submit</string>
     <string name="enter_your_response">enter your response</string>
     <string name="upload_answer">upload answer</string>
@@ -14,4 +14,6 @@
     <string name="professor">professor:</string>
     <string name="title">title:</string>
     <string name="question">question:</string>
+    <string name="label">label</string>
+    <string name="course_name">course name</string>
 </resources>
