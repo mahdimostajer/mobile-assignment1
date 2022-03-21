@@ -45,6 +45,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
                     Intent intent = new Intent(StudentRegisterActivity.this, PanelActivity.class);
                     intent.putExtra(StudentLoginActivity.USERNAME, username);
                     intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.STUDENT);
+                    intent.putExtra(StudentLoginActivity.USERID, studentId);
                     startActivity(intent);
                 }
 
