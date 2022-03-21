@@ -46,7 +46,6 @@
             android:id="@+id/join_button"
             android:text="join"
             android:visibility="gone"
-            app:layout_constraintStart_toEndOf="@id/info_linearlayout"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

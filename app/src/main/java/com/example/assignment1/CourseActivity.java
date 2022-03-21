@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.assignment1.Models.Assignment;
@@ -65,7 +64,7 @@ public class CourseActivity extends AppCompatActivity {
 
         if (allAssignments != null) {
             for (Assignment assignment : allAssignments) {
-                if (assignment.courseName.equals(course.name)) {
+                if (assignment.courseId.equals(course.id)) {
                     assignments.add(assignment);
                 }
             }
@@ -94,7 +93,7 @@ public class CourseActivity extends AppCompatActivity {
                 String title = data.getStringExtra(EXTRA_ASSIGNMENT_TITLE);
                 String question = data.getStringExtra(EXTRA_ASSIGNMENT_QUESTION);
 
-                Assignment newAssignment = new Assignment(course.name, title, question);
+                Assignment newAssignment = new Assignment(course.id, title, question);
                 assignments.add(newAssignment);
                 binding.assignmentRecyclerView.getAdapter().notifyItemInserted(assignments.size() - 1);
 

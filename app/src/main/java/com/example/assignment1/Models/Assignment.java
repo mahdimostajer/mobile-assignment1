@@ -6,15 +6,15 @@ import android.os.Parcelable;
 import java.util.UUID;
 
 public class Assignment implements Parcelable {
-    public String courseName;
+    public String courseId;
     public String title;
     public String id;
     public String question;
 
-    public Assignment(String courseName, String title, String question) {
+    public Assignment(String courseId, String title, String question) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
-        this.courseName = courseName;
+        this.courseId = courseId;
         this.question = question;
     }
 
@@ -25,21 +25,21 @@ public class Assignment implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.courseName);
+        dest.writeString(this.courseId);
         dest.writeString(this.title);
         dest.writeString(this.id);
         dest.writeString(this.question);
     }
 
     public void readFromParcel(Parcel source) {
-        this.courseName = source.readString();
+        this.courseId = source.readString();
         this.title = source.readString();
         this.id = source.readString();
         this.question = source.readString();
     }
 
     protected Assignment(Parcel in) {
-        this.courseName = in.readString();
+        this.courseId = in.readString();
         this.title = in.readString();
         this.id = in.readString();
         this.question = in.readString();
