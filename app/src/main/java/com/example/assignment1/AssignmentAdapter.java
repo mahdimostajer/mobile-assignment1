@@ -1,7 +1,10 @@
 package com.example.assignment1;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.assignment1.Models.Assignment;
+import com.example.assignment1.Models.ResponseAssignment;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.w3c.dom.Text;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.AssignmentViewHolder> {
@@ -20,6 +30,9 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
     private LayoutInflater mInflater;
     private Context context;
     private PanelActivity.UserType userType;
+    private SharedPreferences preferences;
+    private String sharedPrefFile =
+            "com.example.android.assignment1";
 
     public AssignmentAdapter(Context context, List<Assignment> assignments, PanelActivity.UserType userType, String userId) {
         mInflater = LayoutInflater.from(context);
@@ -27,25 +40,28 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
         this.context = context;
         this.userType = userType;
         this.userId = userId;
+        preferences = context.getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
     }
 
     class AssignmentViewHolder extends RecyclerView.ViewHolder {
         public final TextView title;
         public final TextView professor;
+        public final TextView grade;
         final AssignmentAdapter mAdapter;
 
         public AssignmentViewHolder(View itemView, AssignmentAdapter adapter) {
             super(itemView);
             mAdapter = adapter;
-            title = itemView.findViewById(R.id.course_title);
-            professor = itemView.findViewById(R.id.prof_id);
+            title = itemView.findViewById(R.id.item_title);
+            professor = itemView.findViewById(R.id.item_subtitle);
+            grade = itemView.findViewById(R.id.item_grade);
         }
     }
 
     @NonNull
     @Override
     public AssignmentAdapter.AssignmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mItemView = mInflater.inflate(R.layout.course_item,
+        View mItemView = mInflater.inflate(R.layout.assignment_answer_item,
                 parent, false);
         return new AssignmentViewHolder(mItemView, this);
     }
@@ -55,22 +71,45 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
         Assignment current = assignments.get(position);
         holder.title.setText(current.title);
         holder.professor.setVisibility(View.GONE);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context.getApplicationContext(), AssignmentActivity.class);
-                intent.putExtra(CourseActivity.EXTRA_ASSIGNMENT, current);
-                intent.putExtra(CourseActivity.EXTRA_USER_TYPE, userType);
-                if (userType.label.equals("STUDENT")) {
-                    intent.putExtra(StudentLoginActivity.USERID,userId);
-                }
-                ((CourseActivity) context).startActivity(intent);
+        if (userType.label.equals("PROFESSOR")) {
+            holder.grade.setVisibility(View.GONE);
+        } else {
+            ResponseAssignment responseAssignment = getAssignment(current.id);
+            String grade = "-";
+            if (responseAssignment != null) {
+                grade = responseAssignment.grade;
             }
+            holder.grade.setText(grade);
+        }
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent;
+            if (userType.label.equals("PROFESSOR")) {
+                intent = new Intent(context.getApplicationContext(), ProfessorAssignmentActivity.class);
+            } else {
+                intent = new Intent(context.getApplicationContext(), StudentAssignmentActivity.class);
+                intent.putExtra(StudentLoginActivity.USERID,userId);
+            }
+            intent.putExtra(CourseActivity.EXTRA_ASSIGNMENT, current);
+            context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
         return assignments.size();
+    }
+
+    private ResponseAssignment getAssignment(String assignmentId) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<ResponseAssignment>>() {}.getType();
+        List<ResponseAssignment> responseAssignments = gson.fromJson(preferences.getString(StudentAssignmentActivity.RESPONSE_ASSIGNMENTS, null), type);
+        if(responseAssignments == null)
+            responseAssignments = new ArrayList<>();
+        for (ResponseAssignment responseAssignment : responseAssignments) {
+            if (responseAssignment.assignmentId.equals(assignmentId) && userId.equals(responseAssignment.studentId)) {
+                return responseAssignment;
+            }
+        }
+        return null;
     }
 }

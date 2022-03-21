@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment1">
         <activity
-            android:name=".AssignmentActivity"
+            android:name=".ProfessorAssignmentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StudentAssignmentActivity"
             android:exported="false"
             android:label="Response Assignment"
             android:parentActivityName=".CourseActivity" />
@@ -38,8 +41,8 @@
         <activity
             android:name=".PanelActivity"
             android:exported="false"
-            android:launchMode="singleTop"
             android:label="Panel"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ProfessorLoginActivity"

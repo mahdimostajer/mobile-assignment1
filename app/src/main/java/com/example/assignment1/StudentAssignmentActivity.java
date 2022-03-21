@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import com.example.assignment1.Models.Assignment;
 import com.example.assignment1.Models.ResponseAssignment;
-import com.example.assignment1.databinding.ActivityAssignmentBinding;
+import com.example.assignment1.databinding.ActivityStudentAssignmentBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -23,11 +23,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssignmentActivity extends AppCompatActivity {
+public class StudentAssignmentActivity extends AppCompatActivity {
 
-    ActivityAssignmentBinding binding;
+    ActivityStudentAssignmentBinding binding;
     Assignment assignment;
-    PanelActivity.UserType userType;
     TextView answer;
     public final static String RESPONSE_ASSIGNMENTS = "responseAssignments";
     private SharedPreferences preferences;
@@ -38,50 +37,39 @@ public class AssignmentActivity extends AppCompatActivity {
 
     public final static String EXTRA_RESPONSE = "extra response";
     private String userId;
-    private String grade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAssignmentBinding.inflate(getLayoutInflater());
+        binding = ActivityStudentAssignmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         Intent intent = getIntent();
         assignment = intent.getParcelableExtra(CourseActivity.EXTRA_ASSIGNMENT);
-        userType = (PanelActivity.UserType) intent.getSerializableExtra(CourseActivity.EXTRA_USER_TYPE);
-
-        if (userType == PanelActivity.UserType.PROFESSOR) {
-            professorContent();
-        } else {
-            userId = intent.getStringExtra(StudentLoginActivity.USERID);
-            studentContent();
-        }
-
+        userId = intent.getStringExtra(StudentLoginActivity.USERID);
+        studentContent();
         binding.assignmentTitleTextview.setText(assignment.title);
         binding.assignmentQuestionTextview.setText(assignment.question);
-        ResponseAssignment responseAssignment = getAssignment();
-        if (responseAssignment != null) {
-            binding.uploadButton.setText("change answer");
-            binding.assignmentAnswerTextview.setText(responseAssignment.answer);
-            grade = responseAssignment.grade;
-        } else {
-            binding.assignmentAnswerTextview.setText("no answer yet");
-            binding.assignmentAnswerTextview.setTextColor(Color.RED);
-        }
 
 
 
-    }
-
-    private void professorContent() {
 
     }
 
     private void studentContent() {
+        ResponseAssignment initResponseAssignment = getAssignment();
+        if (initResponseAssignment != null) {
+            binding.uploadButton.setText("change answer");
+            binding.assignmentAnswerTextview.setText(initResponseAssignment.answer);
+            binding.assignmentGradeTextview.setText(initResponseAssignment.grade);
+        } else {
+            binding.assignmentAnswerTextview.setText("no answer yet");
+            binding.assignmentAnswerTextview.setTextColor(Color.RED);
+        }
         binding.uploadButton.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            final View dialogView = LayoutInflater.from(this).inflate(R.layout.fragment_assignment_answer_dialog, null);
-            TextView question = dialogView.findViewById(R.id.answer_dialog_question_textview);
+            final View dialogView = LayoutInflater.from(this).inflate(R.layout.fragment_student_assignment_answer_dialog, null);
+            TextView question = dialogView.findViewById(R.id.student_answer_dialog_question_textview);
             question.setText(assignment.question);
             answer = dialogView.findViewById(R.id.answer_dialog_plain_text);
             ResponseAssignment responseAssignment = getAssignment();
@@ -99,7 +87,7 @@ public class AssignmentActivity extends AppCompatActivity {
     private ResponseAssignment getAssignment() {
         Gson gson = new Gson();
         Type type = new TypeToken<List<ResponseAssignment>>() {}.getType();
-        List<ResponseAssignment> responseAssignments = gson.fromJson(preferences.getString(AssignmentActivity.RESPONSE_ASSIGNMENTS, null), type);
+        List<ResponseAssignment> responseAssignments = gson.fromJson(preferences.getString(StudentAssignmentActivity.RESPONSE_ASSIGNMENTS, null), type);
         if(responseAssignments == null)
             responseAssignments = new ArrayList<>();
         for (ResponseAssignment responseAssignment : responseAssignments) {
@@ -113,7 +101,7 @@ public class AssignmentActivity extends AppCompatActivity {
     private void handleAnswerSubmission() {
         Gson gson = new Gson();
         Type type = new TypeToken<List<ResponseAssignment>>() {}.getType();
-        List<ResponseAssignment> responseAssignments = gson.fromJson(preferences.getString(AssignmentActivity.RESPONSE_ASSIGNMENTS, null), type);
+        List<ResponseAssignment> responseAssignments = gson.fromJson(preferences.getString(StudentAssignmentActivity.RESPONSE_ASSIGNMENTS, null), type);
         if(responseAssignments == null)
             responseAssignments = new ArrayList<>();
         ArrayList<ResponseAssignment> toBeRemoved = new ArrayList<>();
@@ -127,12 +115,12 @@ public class AssignmentActivity extends AppCompatActivity {
         responseAssignments.add(newResponseAssignment);
         String responsesJson = gson.toJson(responseAssignments);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(AssignmentActivity.RESPONSE_ASSIGNMENTS, responsesJson);
+        editor.putString(StudentAssignmentActivity.RESPONSE_ASSIGNMENTS, responsesJson);
         editor.apply();
         binding.assignmentAnswerTextview.setText(answer.getText().toString());
         binding.assignmentAnswerTextview.setTextColor(Color.GREEN);
         binding.uploadButton.setText("change answer");
-        Toast.makeText(AssignmentActivity.this, "response submitted successfully", Toast.LENGTH_LONG).show();
+        Toast.makeText(StudentAssignmentActivity.this, "response submitted successfully", Toast.LENGTH_LONG).show();
         Toast.makeText(this, answer.getText().toString(), Toast.LENGTH_LONG).show();
     }
 

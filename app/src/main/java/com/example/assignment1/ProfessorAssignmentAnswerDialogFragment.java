@@ -1,18 +1,18 @@
 package com.example.assignment1;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.assignment1.databinding.FragmentAssignmentAnswerDialogBinding;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class AssignmentAnswerDialogFragment extends Fragment {
+import com.example.assignment1.databinding.FragmentProfessorAssignmentAnswerDialogBinding;
 
-    private FragmentAssignmentAnswerDialogBinding binding;
+public class ProfessorAssignmentAnswerDialogFragment extends Fragment {
+    private FragmentProfessorAssignmentAnswerDialogBinding binding;
 
     @Override
     public View onCreateView(
@@ -20,7 +20,7 @@ public class AssignmentAnswerDialogFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding = FragmentAssignmentAnswerDialogBinding.inflate(inflater, container, false);
+        binding = FragmentProfessorAssignmentAnswerDialogBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }

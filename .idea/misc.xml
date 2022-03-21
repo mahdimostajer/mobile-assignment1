@@ -16,13 +16,20 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/assignment1/app/src/main/res/layout/fragment_create_course_list_dialog.xml" value="0.19880290722530997" />
         <entry key="..\:/Users/User/AndroidStudioProjects/assignment1/app/src/main/res/layout/fragment_create_course_list_dialog_item.xml" value="0.19880290722530997" />
         <entry key="app/src/main/res/layout/activity_assignment.xml" value="0.5741368611653646" />
-        <entry key="app/src/main/res/layout/activity_course.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/activity_course.xml" value="0.3185811360677083" />
         <entry key="app/src/main/res/layout/activity_create_course.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/activity_join_course.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/activity_new_assignment.xml" value="0.1140625" />
         <entry key="app/src/main/res/layout/activity_panel.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/activity_professor_assignment.xml" value="0.24671916010498687" />
+        <entry key="app/src/main/res/layout/activity_student_assignment.xml" value="0.46996765136718754" />
         <entry key="app/src/main/res/layout/activity_student_login.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/assignment_answer_item.xml" value="0.3305877685546875" />
+        <entry key="app/src/main/res/layout/course_item.xml" value="0.23869171142578127" />
         <entry key="app/src/main/res/layout/fragment_assignment_answer_dialog.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/fragment_professor_assignment_answer_dialog.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/fragment_student_assignment_answer_dialog.xml" value="0.13825225830078128" />
       </map>
     </option>
   </component>

@@ -17,7 +17,7 @@
         android:layout_marginVertical="10dp"
         android:orientation="horizontal">
         <LinearLayout
-            android:id="@+id/info_linearlayout"
+            android:id="@+id/assignment_info_linearlayout"
             android:layout_marginLeft="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:orientation="vertical" android:layout_width="wrap_content">
 
             <TextView
-                android:id="@+id/course_title"
+                android:id="@+id/item_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
@@ -35,7 +35,7 @@
                 tools:text="riazi" />
 
             <TextView
-                android:id="@+id/prof_id"
+                android:id="@+id/item_subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="akbar" />
@@ -46,11 +46,23 @@
             android:id="@+id/join_button"
             android:text="join"
             android:visibility="gone"
-            app:layout_constraintStart_toEndOf="@id/info_linearlayout"
+            app:layout_constraintStart_toEndOf="@id/assignment_info_linearlayout"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+        <TextView
 
+            android:id="@+id/item_grade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/teal_700"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="20" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
