@@ -50,6 +50,7 @@ public class PanelActivity extends AppCompatActivity {
     private CourseAdapter courseAdapter;
     private String username;
     private UserType type;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,8 @@ public class PanelActivity extends AppCompatActivity {
         Intent intent = getIntent();
         username = intent.getStringExtra(ProfessorLoginActivity.USERNAME);
         type = (UserType) intent.getSerializableExtra(MainActivity.USERTYPE);
+        userId = intent.getStringExtra(StudentLoginActivity.USERID);
+
         mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
 
         if (type == UserType.PROFESSOR) {
@@ -136,7 +139,7 @@ public class PanelActivity extends AppCompatActivity {
         });
 
 
-        courseAdapter = new CourseAdapter(PanelActivity.this, personCourses, this.type);
+        courseAdapter = new CourseAdapter(PanelActivity.this, personCourses, this.type,null);
         binding.courseRecyclerview.setAdapter(courseAdapter);
         binding.courseRecyclerview.setLayoutManager(new LinearLayoutManager(PanelActivity.this));
 
@@ -166,7 +169,7 @@ public class PanelActivity extends AppCompatActivity {
             }
         });
 
-        courseAdapter = new CourseAdapter(PanelActivity.this, personCourses, this.type);
+        courseAdapter = new CourseAdapter(PanelActivity.this, personCourses, this.type, this.userId);
         binding.courseRecyclerview.setAdapter(courseAdapter);
         binding.courseRecyclerview.setLayoutManager(new LinearLayoutManager(PanelActivity.this));
     }

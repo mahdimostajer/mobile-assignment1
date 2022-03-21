@@ -23,6 +23,7 @@ import java.util.List;
 
 public class StudentLoginActivity extends AppCompatActivity {
     public final static String USERNAME = "username";
+    public final static String USERID = "userId";
     private SharedPreferences preferences;
     ActivityStudentLoginBinding binding;
     String username, password;
@@ -34,7 +35,7 @@ public class StudentLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityStudentLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        TextView textView = (TextView) findViewById(R.id.registerTextView);
+        TextView textView = findViewById(R.id.registerTextView);
         String text = "Don't have an account? Register";
         SpannableString ss = new SpannableString(text);
         ClickableSpan cs = new ClickableSpan() {
@@ -49,23 +50,21 @@ public class StudentLoginActivity extends AppCompatActivity {
         textView.setText(ss);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
 
-        binding.loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                username = binding.editTextUsername.getText().toString();
-                password = binding.editTextPassword.getText().toString();
-                boolean isValid = validateUser(username, password);
-                if (isValid){
-                    Intent intent = new Intent(StudentLoginActivity.this, PanelActivity.class);
-                    intent.putExtra(StudentLoginActivity.USERNAME, username);
-                    intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.STUDENT);
-                    startActivity(intent);
-                }
+        binding.loginButton.setOnClickListener(view -> {
+            username = binding.editTextUsername.getText().toString();
+            password = binding.editTextPassword.getText().toString();
+            Student student = getStudent(username, password);
+            if (student != null) {
+                Intent intent = new Intent(StudentLoginActivity.this, PanelActivity.class);
+                intent.putExtra(StudentLoginActivity.USERNAME, username);
+                intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.STUDENT);
+                intent.putExtra(StudentLoginActivity.USERID, student.studentId);
+                startActivity(intent);
             }
         });
     }
 
-    private boolean validateUser(String username, String password){
+    private Student getStudent(String username, String password){
         String sharedPrefFile = "com.example.android.assignment1";
         preferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         Gson gson = new Gson();
@@ -75,13 +74,13 @@ public class StudentLoginActivity extends AppCompatActivity {
             for (Student student : students){
                 if(student.username.equals(username)){
                     if(student.password.equals(password))
-                        return true;
+                        return student;
                     Toast.makeText(StudentLoginActivity.this, "Wrong password is entered!", Toast.LENGTH_LONG).show();
-                    return false;
+                    return null;
                 }
             }
         }
         Toast.makeText(StudentLoginActivity.this, "Student doesn't exists with this username!", Toast.LENGTH_LONG).show();
-        return false;
+        return null;
     }
 }

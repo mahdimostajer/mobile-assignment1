@@ -21,12 +21,14 @@ public class CourseAdapter extends
     private LayoutInflater mInflater;
     private Context context;
     private PanelActivity.UserType userType;
+    private String userId;
 
-    public CourseAdapter(Context context, List<Course> courseList, PanelActivity.UserType userType) {
+    public CourseAdapter(Context context, List<Course> courseList, PanelActivity.UserType userType,String userId) {
         mInflater = LayoutInflater.from(context);
         this.courseList = courseList;
         this.context = context;
         this.userType = userType;
+        this.userId = userId;
     }
 
     class CourseViewHolder extends RecyclerView.ViewHolder {
@@ -57,14 +59,14 @@ public class CourseAdapter extends
         Course current = courseList.get(position);
         holder.title.setText(current.name);
         holder.professor.setText(current.ProfessorUsername);
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, CourseActivity.class);
-                intent.putExtra(PanelActivity.EXTRA_COURSE, current);
-                intent.putExtra(PanelActivity.EXTRA_USER_TYPE, userType);
-                context.startActivity(intent);
+        holder.view.setOnClickListener(view -> {
+            Intent intent = new Intent(context, CourseActivity.class);
+            intent.putExtra(PanelActivity.EXTRA_COURSE, current);
+            intent.putExtra(PanelActivity.EXTRA_USER_TYPE, userType);
+            if (userType.label.equals("STUDENT")) {
+                intent.putExtra(StudentLoginActivity.USERID, userId);
             }
+            context.startActivity(intent);
         });
     }
 

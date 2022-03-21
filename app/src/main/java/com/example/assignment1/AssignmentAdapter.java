@@ -16,15 +16,17 @@ import java.util.List;
 
 public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.AssignmentViewHolder> {
     private final List<Assignment> assignments;
+    private final String userId;
     private LayoutInflater mInflater;
     private Context context;
     private PanelActivity.UserType userType;
 
-    public AssignmentAdapter(Context context, List<Assignment> assignments, PanelActivity.UserType userType) {
+    public AssignmentAdapter(Context context, List<Assignment> assignments, PanelActivity.UserType userType, String userId) {
         mInflater = LayoutInflater.from(context);
         this.assignments = assignments;
         this.context = context;
         this.userType = userType;
+        this.userId = userId;
     }
 
     class AssignmentViewHolder extends RecyclerView.ViewHolder {
@@ -59,6 +61,9 @@ public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.As
                 Intent intent = new Intent(context.getApplicationContext(), AssignmentActivity.class);
                 intent.putExtra(CourseActivity.EXTRA_ASSIGNMENT, current);
                 intent.putExtra(CourseActivity.EXTRA_USER_TYPE, userType);
+                if (userType.label.equals("STUDENT")) {
+                    intent.putExtra(StudentLoginActivity.USERID,userId);
+                }
                 ((CourseActivity) context).startActivity(intent);
             }
         });

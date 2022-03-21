@@ -39,6 +39,7 @@ public class CourseActivity extends AppCompatActivity {
     private ArrayList<Assignment> assignments = new ArrayList<>();
     private AssignmentAdapter adapter;
     private PanelActivity.UserType userType;
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,9 @@ public class CourseActivity extends AppCompatActivity {
         Intent intent = getIntent();
         course = intent.getParcelableExtra(PanelActivity.EXTRA_COURSE);
         userType = (PanelActivity.UserType) intent.getSerializableExtra(PanelActivity.EXTRA_USER_TYPE);
+        if (userType.label.equals("STUDENT")) {
+            userId = intent.getStringExtra(StudentLoginActivity.USERID);
+        }
         binding.courseNameTextview.setText(course.name);
         binding.professorNameTextview.setText(course.ProfessorUsername);
 
@@ -71,7 +75,7 @@ public class CourseActivity extends AppCompatActivity {
             }
         }
 
-        adapter = new AssignmentAdapter(CourseActivity.this, assignments, userType);
+        adapter = new AssignmentAdapter(CourseActivity.this, assignments, userType, userId);
         binding.assignmentRecyclerView.setAdapter(adapter);
         binding.assignmentRecyclerView.setLayoutManager(new LinearLayoutManager(CourseActivity.this));
 
