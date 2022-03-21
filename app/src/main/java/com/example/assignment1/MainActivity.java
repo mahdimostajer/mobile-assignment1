@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.assignment1.databinding.ActivityMainBinding;
 
+
 public class MainActivity extends AppCompatActivity{
     ActivityMainBinding binding;
     public final static String USERTYPE = "type";
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+//        reset();
         binding.studentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,10 +40,10 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-//    private void reset(){
-//        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
-//        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
-//        preferencesEditor.clear();
-//        preferencesEditor.apply();
-//    }
+    private void reset(){
+        mPreferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
+        SharedPreferences.Editor preferencesEditor = mPreferences.edit();
+        preferencesEditor.clear();
+        preferencesEditor.apply();
+    }
 }

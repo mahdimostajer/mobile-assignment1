@@ -78,13 +78,21 @@ public class PanelActivity extends AppCompatActivity {
         if (requestCode == CREATE_COURSE_REQUEST) {
             if (resultCode == RESULT_OK) {
                 String name = data.getStringExtra(CreateCourseActivity.COURSE_NAME);
-
-                personCourses.add(new Course(name, username));
+                Course newCourse = new Course(name, username);
+                personCourses.add(newCourse);
                 binding.courseRecyclerview.getAdapter().notifyItemInserted(personCourses.size() - 1);
                 binding.courseRecyclerview.smoothScrollToPosition(personCourses.size() - 1);
 
                 Gson gson = new Gson();
-                String json = gson.toJson(personCourses);
+                Type type = new TypeToken<List<Course>>() {
+                }.getType();
+                List<Course> courses = gson.fromJson(mPreferences.getString(CLASS_ROOMS, null), type);
+                if (courses == null)
+                    courses = new ArrayList<>();
+                courses.add(newCourse);
+
+                Gson gson2 = new Gson();
+                String json = gson2.toJson(courses);
                 SharedPreferences.Editor preferencesEditor = mPreferences.edit();
                 preferencesEditor.putString(CLASS_ROOMS, json);
                 preferencesEditor.apply();
