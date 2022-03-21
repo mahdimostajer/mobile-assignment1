@@ -37,7 +37,7 @@ public class ProfessorAssignmentActivity extends AppCompatActivity {
 
 
     private void sendMessage() {
-        Intent intent = new Intent("custom-event-name");
+        Intent intent = new Intent("refreshAssignments");
         intent.putExtra("KEY", "Value");
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }

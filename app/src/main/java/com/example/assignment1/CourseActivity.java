@@ -59,7 +59,7 @@ public class CourseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
-                new IntentFilter("refresh"));
+                new IntentFilter("refreshAssignments"));
         super.onCreate(savedInstanceState);
         binding = ActivityCourseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
