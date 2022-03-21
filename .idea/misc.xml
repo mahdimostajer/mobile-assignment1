@@ -29,7 +29,7 @@
         <entry key="app/src/main/res/layout/course_item.xml" value="0.23869171142578127" />
         <entry key="app/src/main/res/layout/fragment_assignment_answer_dialog.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_professor_assignment_answer_dialog.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/fragment_student_assignment_answer_dialog.xml" value="0.13825225830078128" />
+        <entry key="app/src/main/res/layout/fragment_student_assignment_answer_dialog.xml" value="0.1" />
       </map>
     </option>
   </component>
