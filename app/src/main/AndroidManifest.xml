@@ -11,7 +11,8 @@
         android:theme="@style/Theme.Assignment1">
         <activity
             android:name=".ProfessorAssignmentActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".CourseActivity"/>
         <activity
             android:name=".StudentAssignmentActivity"
             android:exported="false"

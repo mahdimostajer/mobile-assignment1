@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.assignment1.Models.Assignment;
@@ -33,6 +34,13 @@ public class ProfessorAssignmentActivity extends AppCompatActivity {
     private AssignmentAnswerAdapter adapter;
 
     public final static String EXTRA_RESPONSE = "extra response";
+
+
+    private void sendMessage() {
+        Intent intent = new Intent("custom-event-name");
+        intent.putExtra("KEY", "Value");
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +71,7 @@ public class ProfessorAssignmentActivity extends AppCompatActivity {
                 SharedPreferences.Editor preferencesEditor = preferences.edit();
                 preferencesEditor.putString(CourseActivity.ASSIGNMENTS, json2);
                 preferencesEditor.apply();
+                sendMessage();
 
             }
         });
@@ -87,8 +96,5 @@ public class ProfessorAssignmentActivity extends AppCompatActivity {
 
 
     }
-
-
-
 
 }

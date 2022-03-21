@@ -2,9 +2,14 @@ package com.example.assignment1;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,9 +45,24 @@ public class CourseActivity extends AppCompatActivity {
     private AssignmentAdapter adapter;
     private PanelActivity.UserType userType;
     private String userId;
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateAssignments();
+            binding.assignmentRecyclerView.getAdapter().notifyDataSetChanged();
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+        super.onDestroy();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("custom-event-name"));
         super.onCreate(savedInstanceState);
         binding = ActivityCourseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -62,31 +82,22 @@ public class CourseActivity extends AppCompatActivity {
             binding.newAssignmentButton.setVisibility(View.VISIBLE);
         }
 
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<Assignment>>() {
-        }.getType();
-        List<Assignment> allAssignments = gson.fromJson(mPreferences.getString(ASSIGNMENTS, null), type);
-
-        if (allAssignments != null) {
-            for (Assignment assignment : allAssignments) {
-                if (assignment.courseName.equals(course.name)) {
-                    assignments.add(assignment);
-                }
-            }
-        }
+        updateAssignments();
 
         adapter = new AssignmentAdapter(CourseActivity.this, assignments, userType, userId);
         binding.assignmentRecyclerView.setAdapter(adapter);
         binding.assignmentRecyclerView.setLayoutManager(new LinearLayoutManager(CourseActivity.this));
+        binding.swiperefreshlayout.setOnRefreshListener(() -> {
+            updateAssignments();
+            binding.assignmentRecyclerView.getAdapter().notifyDataSetChanged();
+            binding.swiperefreshlayout.setRefreshing(false);
 
-        binding.newAssignmentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(CourseActivity.this, NewAssignmentActivity.class);
-                startActivityForResult(intent, CREATE_ASSIGNMENT_REQUEST);
+        });
+        binding.newAssignmentButton.setOnClickListener(view -> {
+            Intent intent1 = new Intent(CourseActivity.this, NewAssignmentActivity.class);
+            startActivityForResult(intent1, CREATE_ASSIGNMENT_REQUEST);
 //                assignments.add(new Assignment(course.name, "hw1", "how are you?"));
 //                binding.assignmentRecyclerView.getAdapter().notifyItemInserted(assignments.size() - 1);
-            }
         });
     }
 
@@ -118,6 +129,21 @@ public class CourseActivity extends AppCompatActivity {
                 preferencesEditor.putString(ASSIGNMENTS, json2);
                 preferencesEditor.apply();
 
+            }
+        }
+    }
+    private void updateAssignments() {
+        assignments.clear();
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<Assignment>>() {
+        }.getType();
+        List<Assignment> allAssignments = gson.fromJson(mPreferences.getString(ASSIGNMENTS, null), type);
+
+        if (allAssignments != null) {
+            for (Assignment assignment : allAssignments) {
+                if (assignment.courseName.equals(course.name)) {
+                    assignments.add(assignment);
+                }
             }
         }
     }
