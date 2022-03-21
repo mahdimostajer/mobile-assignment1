@@ -10,13 +10,23 @@
     <!-- TODO: Update blank fragment layout -->
 
     <EditText
-        android:id="@+id/answer_plain_text"
+        android:id="@+id/answer_dialog_plain_text"
         android:layout_width="373dp"
         android:layout_height="43dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="please type your answer here"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/answer_dialog_question_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="question"
+        app:layout_constraintBottom_toTopOf="@+id/answer_dialog_plain_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.assignment1.Models.Assignment;
 import com.example.assignment1.Models.ResponseAssignment;
-import com.example.assignment1.Models.Student;
 import com.example.assignment1.databinding.ActivityAssignmentBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -63,6 +61,7 @@ public class AssignmentActivity extends AppCompatActivity {
         binding.assignmentQuestionTextview.setText(assignment.question);
         ResponseAssignment responseAssignment = getAssignment();
         if (responseAssignment != null) {
+            binding.uploadButton.setText("change answer");
             binding.assignmentAnswerTextview.setText(responseAssignment.answer);
             grade = responseAssignment.grade;
         } else {
@@ -82,8 +81,14 @@ public class AssignmentActivity extends AppCompatActivity {
         binding.uploadButton.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             final View dialogView = LayoutInflater.from(this).inflate(R.layout.fragment_assignment_answer_dialog, null);
-            answer = dialogView.findViewById(R.id.answer_plain_text);
-            builder.setTitle("Answer");
+            TextView question = dialogView.findViewById(R.id.answer_dialog_question_textview);
+            question.setText(assignment.question);
+            answer = dialogView.findViewById(R.id.answer_dialog_plain_text);
+            ResponseAssignment responseAssignment = getAssignment();
+            if (responseAssignment != null) {
+                answer.setText(responseAssignment.answer);
+            }
+            builder.setTitle(assignment.title);
             builder.setView(dialogView);
             builder.setPositiveButton("submit", ((dialogInterface, i) -> handleAnswerSubmission()));
             builder.setNegativeButton("Cancel", (dialogInterface, i) -> dialogInterface.dismiss());
@@ -111,12 +116,22 @@ public class AssignmentActivity extends AppCompatActivity {
         List<ResponseAssignment> responseAssignments = gson.fromJson(preferences.getString(AssignmentActivity.RESPONSE_ASSIGNMENTS, null), type);
         if(responseAssignments == null)
             responseAssignments = new ArrayList<>();
+        ArrayList<ResponseAssignment> toBeRemoved = new ArrayList<>();
+        for (ResponseAssignment responseAssignment : responseAssignments) {
+            if (responseAssignment.assignmentId.equals(assignment.id) && userId.equals(responseAssignment.studentId)) {
+                toBeRemoved.add(responseAssignment);
+            }
+        }
+        responseAssignments.removeAll(toBeRemoved);
         ResponseAssignment newResponseAssignment = new ResponseAssignment(assignment.id, userId, answer.getText().toString());
         responseAssignments.add(newResponseAssignment);
         String responsesJson = gson.toJson(responseAssignments);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(AssignmentActivity.RESPONSE_ASSIGNMENTS, responsesJson);
         editor.apply();
+        binding.assignmentAnswerTextview.setText(answer.getText().toString());
+        binding.assignmentAnswerTextview.setTextColor(Color.GREEN);
+        binding.uploadButton.setText("change answer");
         Toast.makeText(AssignmentActivity.this, "response submitted successfully", Toast.LENGTH_LONG).show();
         Toast.makeText(this, answer.getText().toString(), Toast.LENGTH_LONG).show();
     }
