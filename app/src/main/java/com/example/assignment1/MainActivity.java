@@ -24,19 +24,13 @@ public class MainActivity extends AppCompatActivity{
         setContentView(binding.getRoot());
 
 //        reset();
-        binding.studentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, StudentLoginActivity.class);
-                startActivity(intent);
-            }
+        binding.studentButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, StudentLoginActivity.class);
+            startActivity(intent);
         });
-        binding.professorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ProfessorLoginActivity.class);
-                startActivity(intent);
-            }
+        binding.professorButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ProfessorLoginActivity.class);
+            startActivity(intent);
         });
     }
 

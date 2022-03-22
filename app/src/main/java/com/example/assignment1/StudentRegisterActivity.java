@@ -28,28 +28,25 @@ public class StudentRegisterActivity extends AppCompatActivity {
         binding = ActivityStudentRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firstName = binding.firstNameEditText.getText().toString();
-                lastName = binding.lastNameEditText.getText().toString();
-                studentId = binding.studentIdEditText.getText().toString();
-                username = binding.usernameEditText.getText().toString();
-                password = binding.passwordEditText.getText().toString();
-                passwordConfirm = binding.passwordConfirmEditText.getText().toString();
-                boolean hasEmptyField = checkEmptyFields(firstName, lastName, studentId, username, password, passwordConfirm);
-                boolean hasEqualPassword = checkPasswordConfirmEquality(password, passwordConfirm);
-                boolean professorExistsBefore = checkUserExistence(username);
-                if (!hasEmptyField && hasEqualPassword && !professorExistsBefore){
-                    createStudent(firstName, lastName, studentId, username, password);
-                    Intent intent = new Intent(StudentRegisterActivity.this, PanelActivity.class);
-                    intent.putExtra(StudentLoginActivity.USERNAME, username);
-                    intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.STUDENT);
-                    intent.putExtra(StudentLoginActivity.USERID, studentId);
-                    startActivity(intent);
-                }
-
+        binding.registerButton.setOnClickListener(view -> {
+            firstName = binding.firstNameEditText.getText().toString();
+            lastName = binding.lastNameEditText.getText().toString();
+            studentId = binding.studentIdEditText.getText().toString();
+            username = binding.usernameEditText.getText().toString();
+            password = binding.passwordEditText.getText().toString();
+            passwordConfirm = binding.passwordConfirmEditText.getText().toString();
+            boolean hasEmptyField = checkEmptyFields(firstName, lastName, studentId, username, password, passwordConfirm);
+            boolean hasEqualPassword = checkPasswordConfirmEquality(password, passwordConfirm);
+            boolean professorExistsBefore = checkUserExistence(username);
+            if (!hasEmptyField && hasEqualPassword && !professorExistsBefore){
+                createStudent(firstName, lastName, studentId, username, password);
+                Intent intent = new Intent(StudentRegisterActivity.this, PanelActivity.class);
+                intent.putExtra(StudentLoginActivity.USERNAME, username);
+                intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.STUDENT);
+                intent.putExtra(StudentLoginActivity.USERID, studentId);
+                startActivity(intent);
             }
+
         });
 
     }
@@ -71,7 +68,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
 
         if (!emptyField.isEmpty()){
             int resourceId = getResources().getIdentifier(emptyField, "id", "com.example.assignment1");
-            EditText view = (EditText) findViewById(resourceId);
+            EditText view = findViewById(resourceId);
             Toast.makeText(StudentRegisterActivity.this, String.format("Field %s is empty!", view.getHint().toString()), Toast.LENGTH_LONG).show();
             return true;
         }

@@ -59,15 +59,12 @@ public class JoinCourseAdapter extends RecyclerView.Adapter<JoinCourseAdapter.Jo
         holder.title.setText(current.name);
         holder.professor.setText(current.ProfessorUsername);
         holder.joinButton.setVisibility(View.VISIBLE);
-        holder.joinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.putExtra(JoinCourseActivity.JOINED_COURSE,current);
-                if (context instanceof Activity)
-                    ((Activity) context).setResult(Activity.RESULT_OK, intent);
-                ((Activity) context).finish();
-            }
+        holder.joinButton.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.putExtra(JoinCourseActivity.JOINED_COURSE,current);
+            if (context instanceof Activity)
+                ((Activity) context).setResult(Activity.RESULT_OK, intent);
+            ((Activity) context).finish();
         });
     }
 

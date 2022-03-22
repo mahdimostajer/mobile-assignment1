@@ -138,12 +138,9 @@ public class PanelActivity extends AppCompatActivity {
 
         binding.newCourseButton.setText(R.string.create_class);
 
-        binding.newCourseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PanelActivity.this, CreateCourseActivity.class);
-                startActivityForResult(intent, CREATE_COURSE_REQUEST);
-            }
+        binding.newCourseButton.setOnClickListener(view -> {
+            Intent intent = new Intent(PanelActivity.this, CreateCourseActivity.class);
+            startActivityForResult(intent, CREATE_COURSE_REQUEST);
         });
 
 
@@ -168,13 +165,10 @@ public class PanelActivity extends AppCompatActivity {
         }
 
         binding.newCourseButton.setText(R.string.join_class);
-        binding.newCourseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PanelActivity.this, JoinCourseActivity.class);
-                intent.putParcelableArrayListExtra(EXTRA_JOIN_CLASSES, personCourses);
-                startActivityForResult(intent, Join_COURSE_REQUEST);
-            }
+        binding.newCourseButton.setOnClickListener(view -> {
+            Intent intent = new Intent(PanelActivity.this, JoinCourseActivity.class);
+            intent.putParcelableArrayListExtra(EXTRA_JOIN_CLASSES, personCourses);
+            startActivityForResult(intent, Join_COURSE_REQUEST);
         });
 
         courseAdapter = new CourseAdapter(PanelActivity.this, personCourses, this.type, this.userId);

@@ -9,9 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.assignment1.Models.Course;
 import com.example.assignment1.Models.Professor;
-import com.example.assignment1.databinding.ActivityProfessorLoginBinding;
 import com.example.assignment1.databinding.ActivityProfessorRegisterBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,27 +30,24 @@ public class ProfessorRegisterActivity extends AppCompatActivity {
         binding = ActivityProfessorRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firstName = binding.firstNameEditText.getText().toString();
-                lastName = binding.lastNameEditText.getText().toString();
-                university = binding.universityEditText.getText().toString();
-                username = binding.usernameEditText.getText().toString();
-                password = binding.passwordEditText.getText().toString();
-                passwordConfirm = binding.passwordConfirmEditText.getText().toString();
-                boolean hasEmptyField = checkEmptyFields(firstName, lastName, university, username, password, passwordConfirm);
-                boolean hasEqualPassword = checkPasswordConfirmEquality(password, passwordConfirm);
-                boolean professorExistsBefore = checkUserExistence(username);
-                if (!hasEmptyField && hasEqualPassword && !professorExistsBefore){
-                    createProfessor(firstName, lastName, university, username, password);
-                    Intent intent = new Intent(ProfessorRegisterActivity.this, PanelActivity.class);
-                    intent.putExtra(ProfessorLoginActivity.USERNAME, username);
-                    intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.PROFESSOR);
-                    startActivity(intent);
-                }
-
+        binding.registerButton.setOnClickListener(view -> {
+            firstName = binding.firstNameEditText.getText().toString();
+            lastName = binding.lastNameEditText.getText().toString();
+            university = binding.universityEditText.getText().toString();
+            username = binding.usernameEditText.getText().toString();
+            password = binding.passwordEditText.getText().toString();
+            passwordConfirm = binding.passwordConfirmEditText.getText().toString();
+            boolean hasEmptyField = checkEmptyFields(firstName, lastName, university, username, password, passwordConfirm);
+            boolean hasEqualPassword = checkPasswordConfirmEquality(password, passwordConfirm);
+            boolean professorExistsBefore = checkUserExistence(username);
+            if (!hasEmptyField && hasEqualPassword && !professorExistsBefore){
+                createProfessor(firstName, lastName, university, username, password);
+                Intent intent = new Intent(ProfessorRegisterActivity.this, PanelActivity.class);
+                intent.putExtra(ProfessorLoginActivity.USERNAME, username);
+                intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.PROFESSOR);
+                startActivity(intent);
             }
+
         });
 
     }
@@ -74,7 +69,7 @@ public class ProfessorRegisterActivity extends AppCompatActivity {
 
         if (!emptyField.isEmpty()){
             int resourceId = getResources().getIdentifier(emptyField, "id", "com.example.assignment1");
-            EditText view = (EditText) findViewById(resourceId);
+            EditText view = findViewById(resourceId);
             Toast.makeText(ProfessorRegisterActivity.this, String.format("Field %s is empty!", view.getHint().toString()), Toast.LENGTH_LONG).show();
             return true;
         }

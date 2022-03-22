@@ -92,8 +92,6 @@ public class CourseActivity extends AppCompatActivity {
         binding.newAssignmentButton.setOnClickListener(view -> {
             Intent intent1 = new Intent(CourseActivity.this, NewAssignmentActivity.class);
             startActivityForResult(intent1, CREATE_ASSIGNMENT_REQUEST);
-//                assignments.add(new Assignment(course.name, "hw1", "how are you?"));
-//                binding.assignmentRecyclerView.getAdapter().notifyItemInserted(assignments.size() - 1);
         });
     }
 

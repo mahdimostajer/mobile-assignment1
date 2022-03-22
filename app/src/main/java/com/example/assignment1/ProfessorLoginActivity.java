@@ -7,7 +7,6 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,8 +14,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.assignment1.Models.Professor;
-import com.example.assignment1.Models.Student;
-import com.example.assignment1.databinding.ActivityMainBinding;
 import com.example.assignment1.databinding.ActivityProfessorLoginBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,7 +33,7 @@ public class ProfessorLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityProfessorLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        TextView textView = (TextView) findViewById(R.id.registerTextView);
+        TextView textView = findViewById(R.id.registerTextView);
         String text = "Don't have an account? Register";
         SpannableString ss = new SpannableString(text);
         ClickableSpan cs = new ClickableSpan() {
@@ -51,18 +48,15 @@ public class ProfessorLoginActivity extends AppCompatActivity {
         textView.setText(ss);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
 
-        binding.loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                username = binding.editTextUsername.getText().toString();
-                password = binding.editTextPassword.getText().toString();
-                boolean isValid = validateUser(username, password);
-                if (isValid){
-                    Intent intent = new Intent(ProfessorLoginActivity.this, PanelActivity.class);
-                    intent.putExtra(StudentLoginActivity.USERNAME, username);
-                    intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.PROFESSOR);
-                    startActivity(intent);
-                }
+        binding.loginButton.setOnClickListener(view -> {
+            username = binding.editTextUsername.getText().toString();
+            password = binding.editTextPassword.getText().toString();
+            boolean isValid = validateUser(username, password);
+            if (isValid){
+                Intent intent = new Intent(ProfessorLoginActivity.this, PanelActivity.class);
+                intent.putExtra(StudentLoginActivity.USERNAME, username);
+                intent.putExtra(MainActivity.USERTYPE, PanelActivity.UserType.PROFESSOR);
+                startActivity(intent);
             }
         });
     }
