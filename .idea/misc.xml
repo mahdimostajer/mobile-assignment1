@@ -23,13 +23,15 @@
         <entry key="app/src/main/res/layout/activity_new_assignment.xml" value="0.1140625" />
         <entry key="app/src/main/res/layout/activity_panel.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/activity_professor_assignment.xml" value="0.24671916010498687" />
+        <entry key="app/src/main/res/layout/activity_professor_login.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/activity_professor_register.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/activity_student_assignment.xml" value="0.46996765136718754" />
         <entry key="app/src/main/res/layout/activity_student_login.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/assignment_answer_item.xml" value="0.3305877685546875" />
         <entry key="app/src/main/res/layout/course_item.xml" value="0.23869171142578127" />
         <entry key="app/src/main/res/layout/fragment_assignment_answer_dialog.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_professor_assignment_answer_dialog.xml" value="0.2953125" />
-        <entry key="app/src/main/res/layout/fragment_student_assignment_answer_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_student_assignment_answer_dialog.xml" value="0.6672714233398438" />
       </map>
     </option>
   </component>

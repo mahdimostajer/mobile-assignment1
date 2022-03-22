@@ -26,8 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:contentDescription="new course"
-        android:text="new course"
+        android:contentDescription="@string/new_course"
+        android:text="@string/new_course"
         app:icon="@drawable/ic_add_new" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
