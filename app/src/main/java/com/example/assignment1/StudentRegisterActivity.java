@@ -37,7 +37,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
             passwordConfirm = binding.passwordConfirmEditText.getText().toString();
             boolean hasEmptyField = checkEmptyFields(firstName, lastName, studentId, username, password, passwordConfirm);
             boolean hasEqualPassword = checkPasswordConfirmEquality(password, passwordConfirm);
-            boolean professorExistsBefore = checkUserExistence(username);
+            boolean professorExistsBefore = checkUserExistence(username,studentId);
             if (!hasEmptyField && hasEqualPassword && !professorExistsBefore){
                 createStudent(firstName, lastName, studentId, username, password);
                 Intent intent = new Intent(StudentRegisterActivity.this, PanelActivity.class);
@@ -83,7 +83,7 @@ public class StudentRegisterActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean checkUserExistence(String username){
+    private boolean checkUserExistence(String username,String id){
         String sharedPrefFile = "com.example.android.assignment1";
         preferences = getSharedPreferences(sharedPrefFile, MODE_PRIVATE);
         Gson gson = new Gson();
@@ -93,6 +93,10 @@ public class StudentRegisterActivity extends AppCompatActivity {
             for (Student student : students){
                 if(student.username.equals(username)){
                     Toast.makeText(StudentRegisterActivity.this, "Student Exists with this username!", Toast.LENGTH_LONG).show();
+                    return true;
+                }
+                if (student.studentId.equals(id)) {
+                    Toast.makeText(StudentRegisterActivity.this, "Student Exists with this id!", Toast.LENGTH_LONG).show();
                     return true;
                 }
             }
